@@ -28,13 +28,33 @@ Upload an image of waste and let AI identify its category while providing enviro
 st.divider()
 
 # -----------------------------
-# Upload Image
+# Choose Input Method
 # -----------------------------
 
-uploaded_file = st.file_uploader(
-    "📤 Upload an Image",
-    type=["jpg", "jpeg", "png"]
+st.subheader("Choose Input Method")
+
+input_method = st.radio(
+    "",
+    ["📤 Upload Image", "📷 Take Photo"],
+    horizontal=True
 )
+
+uploaded_file = None
+
+if input_method == "📤 Upload Image":
+
+    uploaded_file = st.file_uploader(
+        "Upload an Image",
+        type=["jpg", "jpeg", "png"]
+    )
+
+elif input_method == "📷 Take Photo":
+
+    uploaded_file = st.camera_input("Take a Picture")
+
+# -----------------------------
+# If an image is available
+# -----------------------------
 
 if uploaded_file is not None:
 
